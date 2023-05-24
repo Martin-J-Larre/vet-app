@@ -1,3 +1,7 @@
 export const Header = () => {
-  return <h1 className="text-4xl font-bold  text-indigo-500">Header</h1>;
+  return (
+    <h1 className="font-black text-5xl text-center text-indigo-600 mx-auto">
+      Patient vet
+    </h1>
+  );
 };
