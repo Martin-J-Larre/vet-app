@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
+
 export const Form = () => {
+  const [name, setName] = useState("");
   return (
     <div className="md:w-1/2 lg:w-2/5">
       <h2 className="font-black text-3xl text-center">Traking patients</h2>
