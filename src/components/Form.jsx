@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const Form = () => {
+export const Form = ({ setPatiens, patiens }) => {
   const [name, setName] = useState("");
   const [family, setFamily] = useState("");
   const [email, setEmail] = useState("");
@@ -17,6 +17,20 @@ export const Form = () => {
       return;
     }
     setError(false);
+    const patient = {
+      name,
+      family,
+      email,
+      date,
+      symptoms,
+    };
+    setPatiens([...patiens, patient]);
+
+    setName("");
+    setFamily("");
+    setEmail("");
+    setDate("");
+    setSymptoms("");
   };
 
   return (
