@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Error } from "./Error";
 
 export const Form = ({ setPatiens, patiens }) => {
   const [name, setName] = useState("");
@@ -7,6 +8,10 @@ export const Form = ({ setPatiens, patiens }) => {
   const [date, setDate] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [error, setError] = useState(false);
+
+  const idGenerator = () => {
+    return Math.trunc(Math.random()).toString(36) + Date.now().toString(36);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +28,7 @@ export const Form = ({ setPatiens, patiens }) => {
       email,
       date,
       symptoms,
+      id: idGenerator(),
     };
     setPatiens([...patiens, patient]);
 
@@ -125,11 +131,7 @@ export const Form = ({ setPatiens, patiens }) => {
             value={symptoms}
             onChange={(e) => setSymptoms(e.target.value)}
           />
-          {error && (
-            <p className="text-center text-red-800 font-semibold">
-              Fiels should not be empty
-            </p>
-          )}
+          {error && <Error> Fiels should not be empty </Error>}
         </div>
         <input
           type="submit"
