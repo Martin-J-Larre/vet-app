@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Error } from "./Error";
 
-export const Form = ({ setPatiens, patiens }) => {
+export const Form = ({ setPets, pets, pet }) => {
   const [name, setName] = useState("");
   const [family, setFamily] = useState("");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    console.log(pet);
+  }, [pet]);
 
   const idGenerator = () => {
     return Math.trunc(Math.random()).toString(36) + Date.now().toString(36);
@@ -22,7 +26,7 @@ export const Form = ({ setPatiens, patiens }) => {
       return;
     }
     setError(false);
-    const patient = {
+    const pet = {
       name,
       family,
       email,
@@ -30,7 +34,7 @@ export const Form = ({ setPatiens, patiens }) => {
       symptoms,
       id: idGenerator(),
     };
-    setPatiens([...patiens, patient]);
+    setPets([...pets, pet]);
 
     setName("");
     setFamily("");
@@ -41,9 +45,9 @@ export const Form = ({ setPatiens, patiens }) => {
 
   return (
     <div className="md:w-1/2 lg:w-2/5">
-      <h2 className="font-black text-3xl text-center">Traking patients</h2>
+      <h2 className="font-black text-3xl text-center">Traking pets</h2>
       <p className="text-lg mt-5 text-center mb-10">
-        Add patient and{" "}
+        Add pet and{" "}
         <span className="text-indigo-600 font-bold ">management</span>
       </p>
       <form
@@ -136,7 +140,7 @@ export const Form = ({ setPatiens, patiens }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-semibold hover:bg-indigo-700 cursor-pointer transition-colors"
-          value="Add patienet"
+          value="Add pet"
         />
       </form>
     </div>
