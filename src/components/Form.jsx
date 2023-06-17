@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Error } from "./Error";
 
-export const Form = ({ setPets, pets, pet }) => {
+export const Form = ({ setPets, pets, pet, setPet }) => {
   const [name, setName] = useState("");
   const [family, setFamily] = useState("");
   const [email, setEmail] = useState("");
@@ -10,7 +10,13 @@ export const Form = ({ setPets, pets, pet }) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    console.log(pet);
+    if (Object.keys(pet).length > 0) {
+      setName(pet.name);
+      setFamily(pet.family);
+      setEmail(pet.email);
+      setDate(pet.date);
+      setSymptoms(pet.symptoms);
+    }
   }, [pet]);
 
   const idGenerator = () => {
@@ -26,15 +32,25 @@ export const Form = ({ setPets, pets, pet }) => {
       return;
     }
     setError(false);
-    const pet = {
+    const objPet = {
       name,
       family,
       email,
       date,
       symptoms,
-      id: idGenerator(),
     };
-    setPets([...pets, pet]);
+
+    if (pet.id) {
+      objPet.id = pet.id;
+      const petsUpdated = pets.map((petState) =>
+        petState.id === pet.id ? objPet : petState
+      );
+      setPets(petsUpdated);
+      setPet({});
+    } else {
+      objPet.id = idGenerator();
+      setPets([...pets, objPet]);
+    }
 
     setName("");
     setFamily("");
@@ -140,7 +156,7 @@ export const Form = ({ setPets, pets, pet }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-semibold hover:bg-indigo-700 cursor-pointer transition-colors"
-          value="Add pet"
+          value={pet.id ? "Edit pet" : "Add pet"}
         />
       </form>
     </div>

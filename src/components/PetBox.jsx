@@ -1,7 +1,24 @@
-import React from "react";
+import Swal from "sweetalert2";
 
-export const PetBox = ({ pet, setPet }) => {
-  const { name, family, email, date, symptoms } = pet;
+export const PetBox = ({ pet, setPet, deletePet }) => {
+  const { name, family, email, date, symptoms, id } = pet;
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Delete pet?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "rgb(8 145 178)",
+      confirmButtonText: "Delete",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deletePet(id);
+        Swal.fire("Deleted!", "Pet has been deleted.", "success");
+      }
+    });
+  };
   return (
     <div className="mx-5 my-6 bg-white shadow-md m-3 px-5 py-10 rounded-xl">
       <p className="font-bold mb-3 text-gray-700 uppercase">
@@ -34,6 +51,7 @@ export const PetBox = ({ pet, setPet }) => {
         <button
           type="button"
           className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-semibold uppercase rounded-lg"
+          onClick={handleDelete}
         >
           Delete
         </button>

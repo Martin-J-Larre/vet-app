@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { PetBox } from "./PetBox";
 
-export const ListPet = ({ pets, setPet }) => {
+export const ListPet = ({ pets, setPet, deletePet }) => {
   useEffect(() => {
     if (pets.length > 0) {
       console.log("New pet added");
@@ -20,7 +20,12 @@ export const ListPet = ({ pets, setPet }) => {
             </span>
           </p>
           {pets.map((pet) => (
-            <PetBox key={pet.id} pet={pet} setPet={setPet} />
+            <PetBox
+              key={pet.id}
+              pet={pet}
+              setPet={setPet}
+              deletePet={deletePet}
+            />
           ))}
         </>
       ) : (
