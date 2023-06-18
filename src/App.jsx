@@ -2,16 +2,9 @@ import { useState, useEffect } from "react";
 import { Header, Form, ListPet } from "./components";
 
 function App() {
-  const [pets, setPets] = useState([]);
+  const INITIAL = JSON.parse(localStorage.getItem("pets")) ?? [];
+  const [pets, setPets] = useState(INITIAL);
   const [pet, setPet] = useState({});
-
-  useEffect(() => {
-    const getPetSLS = () => {
-      const petsLS = JSON.parse(localStorage.getItem("pets")) ?? [];
-      setPets(petsLS);
-    };
-    getPetSLS();
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("pets", JSON.stringify(pets));

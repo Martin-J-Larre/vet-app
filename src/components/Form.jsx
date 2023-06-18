@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Error } from "./Error";
 
-export const Form = ({ setPets, pets, pet, setPet }) => {
+export const Form = ({ pets, setPets, pet, setPet }) => {
   const [name, setName] = useState("");
   const [family, setFamily] = useState("");
   const [email, setEmail] = useState("");
